@@ -24,6 +24,11 @@ struct ans
 
 int main()
 {
+
+	int i;
+	srand(time(NULL));
+	for (i = 0; i < 10; i++) printf("%d\n", rand());
+	/*
 	setcursor(0);
 
 	draw_ship(gogo.x, gogo.y);
@@ -113,7 +118,8 @@ int main()
 		Sleep(100);
 		setcolor(2, 0);
 	} while (gogo.ch != 'x');
-
+	*/
+	
 	return 0;
 }
 
