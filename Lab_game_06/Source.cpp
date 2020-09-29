@@ -37,7 +37,10 @@ int main()
 	for (gogo.star=0;gogo.star<20;gogo.star++)
 	{
 		gogo.star_x[gogo.star] = rand() % 120;
+
 		gogo.star_y[gogo.star] = rand() % 5;
+		gogo.star_y[gogo.star] += 1;
+
 		draw_star(gogo.star_x[gogo.star], gogo.star_y[gogo.star]);
 
 
