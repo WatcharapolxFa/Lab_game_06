@@ -21,7 +21,7 @@ struct ans
 	int bullet[5]; // กระสุน
 	int position_x[5]; //ตำแหน่งกระสุน แกน x 5 นัด
 	int position_y[5]; //ตำแหน่งกระสุน แกน y 5 นัด
-	int star[20];
+	int star;
 	int star_x[20];
 	int star_y[20];
 }gogo;
@@ -32,6 +32,14 @@ int main()
 	
 	setcursor(0);
 	srand(time(NULL));
+	for (gogo.star=0;gogo.star<20;gogo.star++)
+	{
+		gogo.star_x[gogo.star] = rand() % 120;
+		gogo.star_y[gogo.star] = rand() % 5;
+		draw_star(gogo.star_x[gogo.star], gogo.star_y[gogo.star]);
+
+
+	}
 
 	draw_ship(gogo.x, gogo.y);
 	for (int i = 0; i < 5; i++)
@@ -137,10 +145,9 @@ void gotoxy(int x, int y)
 // Draw_star
 void draw_star(int x, int y)
 {
-	setcursor(0);
 	setcolor(5,0);
-
-
+	gotoxy(x, y);
+	printf("*");
 }
 // Draw_ship
 void draw_ship(int x, int y)
