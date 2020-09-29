@@ -31,6 +31,7 @@ int main()
 
 	
 	setcursor(0);
+	srand(time(NULL));
 
 	draw_ship(gogo.x, gogo.y);
 	for (int i = 0; i < 5; i++)
@@ -175,7 +176,7 @@ void Draw_bullet(int x, int y)
 {
 	setcolor(6, 0);
 	gotoxy(x, y);
-	printf(" < ^ > ");
+	printf("   ^");
 
 }
 // bullet_ship
