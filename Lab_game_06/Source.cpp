@@ -12,6 +12,7 @@ void setcursor(bool);
 void  Draw_bullet(int, int);
 void bullet_ship(int, int);
 void draw_star(int x, int y);
+void erase_bullet(int x, int y);
 char cursor(int x, int y);
 
 struct ans
@@ -164,6 +165,13 @@ void erase_ship(int x, int y)
 	setcolor(0, 0);
 	gotoxy(x, y); printf("       ");
 }
+
+// erase_bullet
+void erase_bullet(int x, int y)
+{
+	setcolor(0, 0);
+	gotoxy(x, y); printf("  ");
+}
 //set color
 void setcolor(int fg, int bg)
 {
@@ -191,7 +199,7 @@ void Draw_bullet(int x, int y)
 void bullet_ship(int x, int y)
 {
 	setcolor(0, 0);
-	gotoxy(x, y); printf("        ");
+	gotoxy(x, y); printf("    ");
 }
 
 char cursor(int x, int y) {
