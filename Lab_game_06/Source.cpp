@@ -12,6 +12,7 @@ void setcursor(bool);
 void  Draw_bullet(int, int);
 void bullet_ship(int, int);
 void draw_star(int x, int y);
+char cursor(int x, int y);
 
 struct ans
 {
@@ -191,4 +192,16 @@ void bullet_ship(int x, int y)
 {
 	setcolor(0, 0);
 	gotoxy(x, y); printf("        ");
+}
+
+char cursor(int x, int y) {
+	HANDLE hStd = GetStdHandle(STD_OUTPUT_HANDLE);
+	char buf[2]; COORD c = { x,y }; DWORD num_read;
+	if (
+		!ReadConsoleOutputCharacter(hStd, (LPTSTR)buf, 1, c, (LPDWORD)&num_read))
+
+		return '\0';
+	else
+		return buf[0];
+
 }
