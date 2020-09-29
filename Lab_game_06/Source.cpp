@@ -11,6 +11,7 @@ void setcolor(int, int);
 void setcursor(bool);
 void  Draw_bullet(int, int);
 void bullet_ship(int, int);
+void draw_star(int x, int y);
 
 struct ans
 {
@@ -20,15 +21,15 @@ struct ans
 	int bullet[5]; // กระสุน
 	int position_x[5]; //ตำแหน่งกระสุน แกน x 5 นัด
 	int position_y[5]; //ตำแหน่งกระสุน แกน y 5 นัด
+	int star[20];
+	int star_x[20];
+	int star_y[20];
 }gogo;
 
 int main()
 {
 
-	int i;
-	srand(time(NULL));
-	for (i = 0; i < 10; i++) printf("%d\n", rand());
-	/*
+	
 	setcursor(0);
 
 	draw_ship(gogo.x, gogo.y);
@@ -118,7 +119,7 @@ int main()
 		Sleep(100);
 		setcolor(2, 0);
 	} while (gogo.ch != 'x');
-	*/
+	
 	
 	return 0;
 }
@@ -132,7 +133,14 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
+// Draw_star
+void draw_star(int x, int y)
+{
+	setcursor(0);
+	setcolor(5,0);
 
+
+}
 // Draw_ship
 void draw_ship(int x, int y)
 {
