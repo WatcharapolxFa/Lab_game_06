@@ -14,6 +14,7 @@ void bullet_ship(int, int);
 void draw_star(int x, int y);
 void erase_bullet(int x, int y);
 char cursor(int x, int y);
+void draw_scroll(int x, int y);
 
 struct ans
 {
@@ -26,7 +27,9 @@ struct ans
 	int star;
 	int star_x[20];
 	int star_y[20];
+	int scr = 0;
 }gogo;
+
 
 int main()
 {
@@ -34,9 +37,10 @@ int main()
 	
 	setcursor(0);
 	srand(time(NULL));
+	draw_scroll(gogo.x,gogo.y);
 	for (gogo.star=0;gogo.star<20;gogo.star++)
 	{
-		gogo.star_x[gogo.star] = rand() % 120;
+		gogo.star_x[gogo.star] = rand() % 100;
 
 		gogo.star_y[gogo.star] = rand() % 5;
 		gogo.star_y[gogo.star] += 1;
@@ -108,17 +112,17 @@ int main()
 		{
 			erase_ship(gogo.x, gogo.y); draw_ship(gogo.x, gogo.y);
 		}
-		if (gogo.nub[0] == 4 && gogo.x < 113)
+		if (gogo.nub[0] == 4 && gogo.x < 95)
 		{
 			erase_ship(gogo.x, gogo.y); draw_ship(++gogo.x, gogo.y);
 		}
 
-
+		
 		for (int i = 0; i < 5; i++) {
 			if (gogo.bullet[i] == 1)
 			{
 
-				bullet_ship(gogo.position_x[i], gogo.position_y[i]);
+				erase_bullet(gogo.position_x[i], gogo.position_y[i]);
 				gogo.position_y[i] = gogo.position_y[i] - 1;
 				if (gogo.position_y[i] > 0) {
 					Draw_bullet(gogo.position_x[i], gogo.position_y[i]);
@@ -173,7 +177,7 @@ void erase_ship(int x, int y)
 void erase_bullet(int x, int y)
 {
 	setcolor(0, 0);
-	gotoxy(x, y); printf("  ");
+	gotoxy(x, y); printf("    ");
 }
 //set color
 void setcolor(int fg, int bg)
@@ -193,6 +197,7 @@ void setcursor(bool visible)
 // Draw_bullet
 void Draw_bullet(int x, int y)
 {
+	
 	setcolor(6, 0);
 	gotoxy(x, y);
 	printf("   ^");
@@ -202,7 +207,7 @@ void Draw_bullet(int x, int y)
 void bullet_ship(int x, int y)
 {
 	setcolor(0, 0);
-	gotoxy(x, y); printf("    ");
+	gotoxy(x, y); printf("     ");
 }
 
 char cursor(int x, int y) {
@@ -215,4 +220,15 @@ char cursor(int x, int y) {
 	else
 		return buf[0];
 
+}
+
+// Draw_scroll
+void draw_scroll(int x, int y)
+{
+	gotoxy(105,1);
+	printf("============");
+	gotoxy(105, 3);
+	printf("Scror : %d",gogo.scr);
+	gotoxy(105, 5);
+	printf("============");
 }
