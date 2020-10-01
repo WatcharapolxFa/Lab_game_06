@@ -15,6 +15,7 @@ void draw_star(int x, int y);
 void erase_bullet(int x, int y);
 char cursor(int x, int y);
 void draw_scroll(int x, int y);
+void erase_star(int x, int y);
 
 struct ans
 {
@@ -49,7 +50,6 @@ int main()
 
 
 	}
-
 	draw_ship(gogo.x, gogo.y);
 	for (int i = 0; i < 5; i++)
 	{
@@ -123,12 +123,27 @@ int main()
 			{
 
 				erase_bullet(gogo.position_x[i], gogo.position_y[i]);
-				gogo.position_y[i] = gogo.position_y[i] - 1;
 				if (gogo.position_y[i] > 0) {
-					Draw_bullet(gogo.position_x[i], gogo.position_y[i]);
+					if (cursor(gogo.position_x[i], gogo.position_y[i]-1) == '*') // เช็คดาว
+					{
+						
+						Beep(1000 , 100);
+						gogo.bullet[i] = 0;
+						erase_star(gogo.position_x[i], gogo.position_y[i]-1);//ทำลายดาว
+
+						
+					}
+					else
+					{
+						Draw_bullet(gogo.position_x[i], --gogo.position_y[i]);// ถ้าไม่ใช่ดาว
+					}
+				
+					
 				}
 				else
 				{
+					
+					erase_bullet (gogo.position_x[i], gogo.position_y[i] - 1);
 					gogo.bullet[i] = 0;
 				}
 			}
@@ -141,6 +156,7 @@ int main()
 	
 	return 0;
 }
+
 
 
 
@@ -158,6 +174,14 @@ void draw_star(int x, int y)
 	gotoxy(x, y);
 	printf("*");
 }
+// Erase_star
+void erase_star(int x, int y)
+{
+	setcolor(0, 0);
+	gotoxy(x, y);
+	printf(" ");
+}
+
 // Draw_ship
 void draw_ship(int x, int y)
 {
