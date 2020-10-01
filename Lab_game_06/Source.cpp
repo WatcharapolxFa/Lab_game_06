@@ -2,8 +2,6 @@
 #include<windows.h>
 #include<conio.h>
 #include<time.h>
-
-
 void gotoxy(int, int);
 void draw_ship(int, int);
 void erase_ship(int, int);
@@ -22,9 +20,9 @@ struct ans
 	char ch = ' ';
 	int x = 38, y = 20;
 	int nub[2];
-	int bullet[5]; // กระสุน
-	int position_x[5]; //ตำแหน่งกระสุน แกน x 5 นัด
-	int position_y[5]; //ตำแหน่งกระสุน แกน y 5 นัด
+	int bullet[5]; // ¡ÃÐÊØ¹
+	int position_x[5]; //µÓáË¹è§¡ÃÐÊØ¹ á¡¹ x 5 ¹Ñ´
+	int position_y[5]; //µÓáË¹è§¡ÃÐÊØ¹ á¡¹ y 5 ¹Ñ´
 	int star;
 	int star_x[20];
 	int star_y[20];
@@ -35,11 +33,11 @@ struct ans
 int main()
 {
 
-	
+
 	setcursor(0);
 	srand(time(NULL));
-	draw_scroll(gogo.x,gogo.y);
-	for (gogo.star=0;gogo.star<20;gogo.star++)
+	
+	for (gogo.star = 0; gogo.star < 20; gogo.star++)
 	{
 		gogo.star_x[gogo.star] = rand() % 100;
 
@@ -57,6 +55,7 @@ int main()
 	}
 
 	do {
+		draw_scroll(gogo.x, gogo.y);
 		if (_kbhit()) {
 			gogo.ch = _getch();
 
@@ -84,11 +83,11 @@ int main()
 			{
 				for (int i = 0; i < 5; i++)
 				{
-					//โชว์กระสุน
+				
 					if (gogo.bullet[i] == 0)
 					{
 						gogo.bullet[i] = 1;
-						gogo.position_x[i] = gogo.x;
+						gogo.position_x[i] = gogo.x + 2;
 						gogo.position_y[i] = gogo.y - 2;
 						Draw_bullet(gogo.position_x[i], gogo.position_y[i]);
 						break;
@@ -117,33 +116,31 @@ int main()
 			erase_ship(gogo.x, gogo.y); draw_ship(++gogo.x, gogo.y);
 		}
 
-		
+
 		for (int i = 0; i < 5; i++) {
 			if (gogo.bullet[i] == 1)
 			{
-
 				erase_bullet(gogo.position_x[i], gogo.position_y[i]);
-				if (gogo.position_y[i] > 0) {
-					if (cursor(gogo.position_x[i], gogo.position_y[i]-1) == '*') // เช็คดาว
+				if (gogo.position_y[i] > 0)
+				{
+					if (cursor(gogo.position_x[i], gogo.position_y[i] - 1) == '*') // 
 					{
-						
-						Beep(1000 , 100);
+						Beep(1000, 100);
 						gogo.bullet[i] = 0;
-						erase_star(gogo.position_x[i], gogo.position_y[i]-1);//ทำลายดาว
-
+						erase_bullet(gogo.position_x[i], gogo.position_y[i] - 1);
+						erase_star(gogo.position_x[i], gogo.position_y[i] - 1);//
+						gogo.scr++;
+						draw_star(rand() % 100, rand() % 5);
 						
 					}
 					else
 					{
-						Draw_bullet(gogo.position_x[i], --gogo.position_y[i]);// ถ้าไม่ใช่ดาว
+						Draw_bullet(gogo.position_x[i], --gogo.position_y[i]);// 
 					}
-				
-					
 				}
 				else
 				{
-					
-					erase_bullet (gogo.position_x[i], gogo.position_y[i] - 1);
+					erase_bullet(gogo.position_x[i], gogo.position_y[i]);
 					gogo.bullet[i] = 0;
 				}
 			}
@@ -152,13 +149,10 @@ int main()
 		Sleep(100);
 		setcolor(2, 0);
 	} while (gogo.ch != 'x');
-	
-	
+
+
 	return 0;
 }
-
-
-
 
 // Ship position
 void gotoxy(int x, int y)
@@ -170,7 +164,7 @@ void gotoxy(int x, int y)
 // Draw_star
 void draw_star(int x, int y)
 {
-	setcolor(5,0);
+	setcolor(5, 0);
 	gotoxy(x, y);
 	printf("*");
 }
@@ -187,21 +181,21 @@ void draw_ship(int x, int y)
 {
 	setcursor(0);
 	setcolor(2, 4);
-	gotoxy(x, y); printf(" <-0-> ");
+	gotoxy(x, y); printf("<-0->");
 }
 
 // erase_ship
 void erase_ship(int x, int y)
 {
 	setcolor(0, 0);
-	gotoxy(x, y); printf("       ");
+	gotoxy(x, y); printf("     ");
 }
 
 // erase_bullet
 void erase_bullet(int x, int y)
 {
 	setcolor(0, 0);
-	gotoxy(x, y); printf("    ");
+	gotoxy(x, y); printf(" ");
 }
 //set color
 void setcolor(int fg, int bg)
@@ -221,11 +215,9 @@ void setcursor(bool visible)
 // Draw_bullet
 void Draw_bullet(int x, int y)
 {
-	
 	setcolor(6, 0);
 	gotoxy(x, y);
-	printf("   ^");
-
+	printf("^");
 }
 // bullet_ship
 void bullet_ship(int x, int y)
@@ -248,11 +240,14 @@ char cursor(int x, int y) {
 
 // Draw_scroll
 void draw_scroll(int x, int y)
-{
-	gotoxy(105,1);
+{	setcolor(12, 15);
+	gotoxy(105, 1);
 	printf("============");
 	gotoxy(105, 3);
-	printf("Scror : %d",gogo.scr);
+	setcolor(12, 0);
+	printf("Score : %d", gogo.scr);
+	setcolor(12, 15);
 	gotoxy(105, 5);
 	printf("============");
+	
 }
