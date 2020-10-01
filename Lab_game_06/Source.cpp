@@ -20,9 +20,9 @@ struct ans
 	char ch = ' ';
 	int x = 38, y = 20;
 	int nub[2];
-	int bullet[5]; // ¡ÃÐÊØ¹
-	int position_x[5]; //µÓáË¹è§¡ÃÐÊØ¹ á¡¹ x 5 ¹Ñ´
-	int position_y[5]; //µÓáË¹è§¡ÃÐÊØ¹ á¡¹ y 5 ¹Ñ´
+	int bullet[5];
+	int position_x[5]; 
+	int position_y[5]; 
 	int star;
 	int star_x[20];
 	int star_y[20];
